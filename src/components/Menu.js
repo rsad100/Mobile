@@ -4,7 +4,6 @@ import {Text, View, Image, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/Menu';
 import {useNavigation} from '@react-navigation/native';
 
-import profile1 from '../assets/profile1.png';
 import def from '../assets/default.jpg';
 import profile from '../assets/profile.png';
 import cart2 from '../assets/cart2.png';
