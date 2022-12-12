@@ -1,0 +1,93 @@
+import {StyleSheet} from 'react-native';
+
+const styles = StyleSheet.create({
+  view: {
+    backgroundColor: '#F2F2F2',
+  },
+  view1: {width: 87, height: 0, borderWidth: 1, borderColor: '#9F9F9F'},
+  view2: {
+    alignItems: 'center',
+    paddingBottom: 109,
+    paddingTop: 107,
+    paddingLeft: 31,
+    paddingRight: 31,
+  },
+  view3: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 33,
+  },
+  text1: {
+    paddingTop: 6,
+    color: '#000000',
+    fontWeight: '700',
+    fontSize: 65,
+    lineHeight: 56.44,
+    textAlign: 'center',
+    marginBottom: 34,
+  },
+  text2: {
+    color: '#000000',
+    fontWeight: '400',
+    fontSize: 14,
+    lineHeight: 21,
+    marginBottom: 25,
+  },
+  text3: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 17,
+    lineHeight: 26,
+  },
+  text4: {
+    textAlign: 'center',
+    color: '#000000',
+    fontWeight: '400',
+    fontSize: 14,
+    lineHeight: 12.16,
+    letter: '1%',
+    paddingTop: 2,
+    marginBottom: 11,
+  },
+  text5: {
+    fontWeight: '400',
+    fontSize: 14,
+    lineHeight: 21,
+    color: '#9A9A9D',
+    marginLeft: 16,
+    marginRight: 16,
+  },
+  input1: {
+    width: 352,
+    borderBottomWidth: 1,
+    borderBottomColor: '#9F9F9F',
+    paddingBottom: 6,
+    fontWeight: '400',
+    fontSize: 14,
+    lineHeight: 21,
+    marginBottom: 28,
+    color: '#9A9A9D',
+  },
+  input2: {
+    width: 352,
+    borderBottomWidth: 1,
+    borderBottomColor: '#9F9F9F',
+    paddingBottom: 6,
+    fontWeight: '400',
+    fontSize: 14,
+    lineHeight: 21,
+    marginBottom: 23,
+    color: '#9A9A9D',
+  },
+  image1: {marginBottom: 52, width: 267, height: 278},
+  btn1: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 352,
+    height: 70,
+    backgroundColor: '#6A4029',
+    borderRadius: 20,
+  },
+});
+
+export default styles;
