@@ -12,9 +12,10 @@ import styles from '../styles/Signup';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import toast from 'react-native-simple-toast';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 import signup1 from '../assets/signup1.png';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import eye from '../assets/eye.png';
 
 const Signup = () => {
   const navigation = useNavigation();
@@ -22,10 +23,12 @@ const Signup = () => {
   const [password, setPassword] = useState();
   const [phone, setPhone] = useState();
   const [loading, setLoading] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   const submitHandler = async () => {
     try {
-      const url = 'http://192.168.100.3:8080/api/v1/users/register';
+      const url =
+        'https://intermedietebackend.vercel.app/api/v1/users/register';
       setLoading(true);
       const body = {
         email: email,
@@ -67,14 +70,24 @@ const Signup = () => {
               setEmail(text);
             }}
           />
-          <TextInput
-            style={styles.input1}
-            placeholder="Enter your password"
-            value={password}
-            onChangeText={text => {
-              setPassword(text);
-            }}
-          />
+          <View>
+            <TextInput
+              style={styles.input1}
+              placeholder="Enter your password"
+              value={password}
+              secureTextEntry={hidden}
+              onChangeText={text => {
+                setPassword(text);
+              }}
+            />
+            <Pressable
+              onPressIn={() => {
+                hidden === false ? setHidden(true) : setHidden(false);
+              }}
+              style={styles.btn2}>
+              <Image source={eye} />
+            </Pressable>
+          </View>
           <TextInput
             style={styles.input2}
             placeholder="Enter your phone number"

@@ -22,9 +22,10 @@ const ProductCard = props => {
 
   return (
     <Pressable
-      onPressOut={() => {
+      onPressIn={() => {
         storeDataProduct();
         navigation.push('Details');
+        console.log('details');
       }}
       style={styles.view2}>
       <View style={styles.view1}>

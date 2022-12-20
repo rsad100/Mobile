@@ -72,6 +72,25 @@ const styles = StyleSheet.create({
     borderRadius: 3.75,
     backgroundColor: '#6A4029',
   },
+  view13: {
+    position: 'absolute',
+    top: '40%',
+    alignSelf: 'center',
+    width: 346,
+    backgroundColor: '#FFFFFF',
+    zIndex: 1,
+    paddingLeft: 42,
+    paddingRight: 42,
+    paddingTop: 39,
+    paddingBottom: 31,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  view14: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
   input1: {
     alignSelf: 'flex-start',
     paddingBottom: 11,
@@ -123,6 +142,14 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: '#F6F6F9',
   },
+  text5: {
+    fontWeight: '500',
+    fontSize: 15,
+    lineHeight: 22,
+    color: '#000000',
+    marginBottom: 33,
+  },
+  text6: {fontWeight: '700', fontSize: 15, lineHeight: 22.5, color: '#FFFFFF'},
   image1: {width: 24, height: 24},
   image2: {width: 130, height: 130, borderRadius: 65},
   image3: {width: 17, height: 17},
@@ -140,6 +167,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#6A4029',
     borderRadius: 20,
   },
+  btn2: {
+    width: 105,
+    height: 43,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#6A4029',
+    borderRadius: 10,
+  },
+  btn3: {position: 'absolute', top: 25, left: 25},
 });
 
 export default styles;

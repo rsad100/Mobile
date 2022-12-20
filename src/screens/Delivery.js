@@ -21,7 +21,7 @@ const Delivery = () => {
       try {
         const token = await AsyncStorage.getItem('token');
         const info = jwt(token);
-        const url = `http://192.168.100.3:8080/api/v1/users/${info.user_id}`;
+        const url = `https://intermedietebackend.vercel.app/api/v1/users/${info.user_id}`;
         const profileData = await axios.get(url);
         // console.log(profileData.data);
         console.log(profileData.data.result[0]);

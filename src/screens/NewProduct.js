@@ -33,7 +33,7 @@ const NewProduct = () => {
 
   const handleSubmit = async () => {
     try {
-      const url = 'http://192.168.100.3:8080/api/v1/products/';
+      const url = 'https://intermedietebackend.vercel.app/api/v1/products/';
       const tempPhoto = {
         uri: photo?.assets[0]?.uri,
         type: photo?.assets[0]?.type,
@@ -63,6 +63,8 @@ const NewProduct = () => {
       setLoading(false);
 
       toast.show('Product added successfully!', toast.TOP);
+
+      navigation.push('Home');
     } catch (error) {
       setLoading(false);
       toast.show('New Product failed!', toast.TOP);

@@ -38,15 +38,28 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [promos, setPromos] = useState([]);
   const [role, setRole] = useState();
+  const [loading2, setLoading2] = useState(false);
 
   useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      const isLoggedIn = async () => {
+        try {
+          const token = await AsyncStorage.getItem('token');
+          if (token === null) {
+            navigation.push('Login');
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      isLoggedIn();
+    });
     const getProduct = async () => {
       try {
         const url = `https://intermedietebackend.vercel.app/api/v1/products/?filter=${filter}&keyword=${keyword}&sort=${sort}`;
         setLoading(true);
         const result = await axios.get(url);
         setLoading(false);
-        // console.log(result);
         setProducts(result.data.result);
       } catch (error) {
         console.log(error);
@@ -56,22 +69,22 @@ const Home = () => {
       try {
         const token = await AsyncStorage.getItem('token');
         const info = jwt(token);
-        // console.log(info.role);
         setRole(info.role);
         const url = `https://intermedietebackend.vercel.app/api/v1/users/${info.user_id}`;
+        setLoading2(true);
         const profileData = await axios.get(url);
-        // console.log(profileData.data);
-        // console.log(profileData.data.result[0]);
+        setLoading2(false);
         setDisplay(profileData.data.result[0].display_name);
         setEmail(profileData.data.result[0].email);
         setImage(profileData.data.result[0].image_user);
       } catch (error) {
+        setLoading2(false);
         console.log(error);
       }
     };
     const getPromo = async () => {
       try {
-        const url = 'http://192.168.100.3:8080/api/v1/promos/';
+        const url = 'https://intermedietebackend.vercel.app/api/v1/promos/';
         const result = await axios.get(url);
         setPromos(result.data.result);
       } catch (error) {
@@ -81,13 +94,18 @@ const Home = () => {
     getProduct();
     getPromo();
     getProfile();
-  }, [filter, keyword, sort]);
-
-  // console.log(products);
+    return unsubscribe;
+  }, [filter, keyword, sort, navigation]);
 
   return (
     <ScrollView style={styles.view}>
-      <Menu image={image} email={email} display={display} hidden={hidden} />
+      <Menu
+        role={role}
+        image={image}
+        email={email}
+        display={display}
+        hidden={hidden}
+      />
       <View style={styles.view2}>
         <View style={styles.view3}>
           <Pressable
@@ -192,6 +210,7 @@ const Home = () => {
                   price={product.price}
                   id={product.id_product}
                   desc={product.desc_product}
+                  key={product.id_product}
                 />
               );
             })
@@ -203,7 +222,7 @@ const Home = () => {
           horizontal={true}
           showsHorizontalScrollIndicator={true}
           persistentScrollbar={true}>
-          {loading === true ? (
+          {loading2 === true ? (
             <Text style={styles.text8}>Loading...</Text>
           ) : (
             promos.map(x => {
@@ -214,6 +233,7 @@ const Home = () => {
                   price={x.normal_price}
                   id={x.id_promo}
                   desc={x.desc_promo}
+                  key={x.id_promo}
                 />
               );
             })

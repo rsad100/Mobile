@@ -18,12 +18,22 @@ import History from './src/screens/History';
 import NewProduct from './src/screens/NewProduct';
 import NewPromo from './src/screens/NewPromo';
 import EditProduct from './src/screens/EditProduct';
+import Order from './src/screens/Order';
+import Splashscreen from './src/screens/SplashScreen';
+import Dashboard from './src/screens/Dashboard';
 
 function App() {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Screen
+          name="SplashScreen"
+          component={Splashscreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="Welcome"
           component={Welcome}
@@ -132,6 +142,20 @@ function App() {
         <Stack.Screen
           name="EditProduct"
           component={EditProduct}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Order"
+          component={Order}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
           options={{
             headerShown: false,
           }}

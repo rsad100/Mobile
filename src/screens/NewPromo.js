@@ -33,7 +33,7 @@ const NewPromo = () => {
 
   const handleSubmit = async () => {
     try {
-      const url = 'http://192.168.100.3:8080/api/v1/promos/';
+      const url = 'https://intermedietebackend.vercel.app/api/v1/promos/';
       const tempPhoto = {
         uri: photo?.assets[0]?.uri,
         type: photo?.assets[0]?.type,
@@ -63,6 +63,8 @@ const NewPromo = () => {
       setLoading(false);
 
       toast.show('Promo added successfully!', toast.TOP);
+
+      navigation.push('Home');
     } catch (error) {
       setLoading(false);
       toast.show('New Promo creation failed!', toast.TOP);
@@ -79,7 +81,7 @@ const NewPromo = () => {
   };
 
   return (
-    <ScrollView style={styles.view}>
+    <View>
       <ActivityIndicator
         style={
           loading === true
@@ -93,102 +95,107 @@ const NewPromo = () => {
         }
         size="large"
       />
-      <View style={styles.view2}>
-        <View style={styles.view3}>
-          <Pressable
-            onPressIn={() => {
-              navigation.push('Home');
-            }}>
-            <Image style={styles.image1} source={chevronleft1} />
-          </Pressable>
-          <Text style={styles.text1}>New Promo</Text>
-        </View>
-        <View style={styles.view4}>
-          {photo === null ? (
-            <Image style={styles.image2} source={camera} />
-          ) : (
-            <Image style={styles.image3} source={{uri: photo?.assets[0].uri}} />
-          )}
-          <Pressable
-            onPressIn={() => {
-              handleChoosePhoto();
+      <ScrollView style={styles.view}>
+        <View style={styles.view2}>
+          <View style={styles.view3}>
+            <Pressable
+              onPressIn={() => {
+                navigation.push('Home');
+              }}>
+              <Image style={styles.image1} source={chevronleft1} />
+            </Pressable>
+            <Text style={styles.text1}>New Promo</Text>
+          </View>
+          <View style={styles.view4}>
+            {photo === null ? (
+              <Image style={styles.image2} source={camera} />
+            ) : (
+              <Image
+                style={styles.image3}
+                source={{uri: photo?.assets[0].uri}}
+              />
+            )}
+            <Pressable
+              onPressIn={() => {
+                handleChoosePhoto();
+              }}
+              style={styles.view5}>
+              <Text style={styles.text4}>+</Text>
+            </Pressable>
+          </View>
+          <Text style={styles.text2}>Name</Text>
+          <TextInput
+            style={styles.input1}
+            placeholder="Input the promo name"
+            value={name}
+            onChangeText={text => {
+              setName(text);
             }}
-            style={styles.view5}>
-            <Text style={styles.text4}>+</Text>
+          />
+          <Text style={styles.text2}>Price</Text>
+          <TextInput
+            style={styles.input1}
+            placeholder="Input the promo price"
+            value={price}
+            onChangeText={text => {
+              setPrice(text);
+            }}
+          />
+          <Text style={styles.text2}>Discount</Text>
+          <TextInput
+            style={styles.input1}
+            placeholder="Input the promo discount"
+            value={discount}
+            onChangeText={text => {
+              setDiscount(text);
+            }}
+          />
+          <Text style={styles.text2}>Start Date</Text>
+          <TextInput
+            style={styles.input1}
+            placeholder="Input the promo start date"
+            value={start}
+            onChangeText={text => {
+              setStart(text);
+            }}
+          />
+          <Text style={styles.text2}>End Date</Text>
+          <TextInput
+            style={styles.input1}
+            placeholder="Input the promo start date"
+            value={end}
+            onChangeText={text => {
+              setEnd(text);
+            }}
+          />
+          <Text style={styles.text2}>Code</Text>
+          <TextInput
+            style={styles.input1}
+            placeholder="Input the promo start date"
+            value={code}
+            onChangeText={text => {
+              setCode(text);
+            }}
+          />
+          <Text style={styles.text2}>Description</Text>
+          <TextInput
+            style={styles.input2}
+            placeholder="Describe your product"
+            value={desc}
+            onChangeText={text => {
+              setDesc(text);
+            }}
+          />
+          <Pressable
+            onPressIn={() => {
+              handleSubmit();
+            }}
+            style={styles.btn1}>
+            <Text style={styles.text3}>Save Promo</Text>
           </Pressable>
         </View>
-        <Text style={styles.text2}>Name</Text>
-        <TextInput
-          style={styles.input1}
-          placeholder="Input the promo name"
-          value={name}
-          onChangeText={text => {
-            setName(text);
-          }}
-        />
-        <Text style={styles.text2}>Price</Text>
-        <TextInput
-          style={styles.input1}
-          placeholder="Input the promo price"
-          value={price}
-          onChangeText={text => {
-            setPrice(text);
-          }}
-        />
-        <Text style={styles.text2}>Discount</Text>
-        <TextInput
-          style={styles.input1}
-          placeholder="Input the promo discount"
-          value={discount}
-          onChangeText={text => {
-            setDiscount(text);
-          }}
-        />
-        <Text style={styles.text2}>Start Date</Text>
-        <TextInput
-          style={styles.input1}
-          placeholder="Input the promo start date"
-          value={start}
-          onChangeText={text => {
-            setStart(text);
-          }}
-        />
-        <Text style={styles.text2}>End Date</Text>
-        <TextInput
-          style={styles.input1}
-          placeholder="Input the promo start date"
-          value={end}
-          onChangeText={text => {
-            setEnd(text);
-          }}
-        />
-        <Text style={styles.text2}>Code</Text>
-        <TextInput
-          style={styles.input1}
-          placeholder="Input the promo start date"
-          value={code}
-          onChangeText={text => {
-            setCode(text);
-          }}
-        />
-        <Text style={styles.text2}>Description</Text>
-        <TextInput
-          style={styles.input2}
-          placeholder="Describe your product"
-          value={desc}
-          onChangeText={text => {
-            setDesc(text);
-          }}
-        />
-        <Pressable
-          onPressIn={() => {
-            handleSubmit();
-          }}
-          style={styles.btn1}>
-          <Text style={styles.text3}>Save Promo</Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 export default NewPromo;

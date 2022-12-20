@@ -3,6 +3,7 @@ import React from 'react';
 import {Text, View, Image, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/Menu';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import def from '../assets/default.jpg';
 import profile from '../assets/profile.png';
@@ -11,9 +12,21 @@ import menu3 from '../assets/menu3.png';
 import privacy1 from '../assets/privacy1.png';
 import security1 from '../assets/security1.png';
 import arrow1 from '../assets/arrow1.png';
+import toast from 'react-native-simple-toast';
 
 const Menu = props => {
   const navigation = useNavigation();
+
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem('token');
+      toast.show('Logout Success!', toast.TOP);
+      navigation.push('Login');
+    } catch (error) {
+      console.log(error);
+      toast.show('Logout Failed!', toast.TOP);
+    }
+  };
 
   return (
     <ScrollView
@@ -23,11 +36,10 @@ const Menu = props => {
         position: 'absolute',
         flexDirection: 'row',
         flex: 1,
-        height: 907,
+        height: '100%',
         shadowColor: 'rgba(0, 0, 0, 0.37)',
         shadowOffset: {width: 0, height: 6},
         shadowRadius: 20,
-        borderWidth: 1,
       }}>
       <View style={styles.view1}>
         <View style={styles.view2}>
@@ -54,10 +66,16 @@ const Menu = props => {
             <Text style={styles.text3}>Edit Profile</Text>
           </Pressable>
           <View style={styles.view5} />
-          <View style={styles.view4}>
+          <Pressable
+            onPressIn={() => {
+              props.role === 'admin'
+                ? navigation.push('Order')
+                : navigation.push('History');
+            }}
+            style={styles.view4}>
             <Image style={styles.image3} source={cart2} />
             <Text style={styles.text3}>Orders</Text>
-          </View>
+          </Pressable>
           <View style={styles.view5} />
           <View style={styles.view4}>
             <Image style={styles.image3} source={menu3} />
@@ -66,7 +84,16 @@ const Menu = props => {
           <View style={styles.view5} />
           <View style={styles.view4}>
             <Image style={styles.image3} source={privacy1} />
-            <Text style={styles.text3}>Privacy policy</Text>
+            {props.role === 'admin' ? (
+              <Pressable
+                onPressIn={() => {
+                  navigation.push('Dashboard');
+                }}>
+                <Text style={styles.text3}>Sales Report</Text>
+              </Pressable>
+            ) : (
+              <Text style={styles.text3}>Privacy policy</Text>
+            )}
           </View>
           <View style={styles.view5} />
           <View style={styles.view4}>
@@ -76,7 +103,7 @@ const Menu = props => {
         </View>
         <Pressable
           onPressIn={() => {
-            navigation.push('Login');
+            logout();
           }}
           style={styles.view6}>
           <Text style={styles.text3}>Sign-out</Text>

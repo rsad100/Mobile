@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import toast from 'react-native-simple-toast';
 import jwt from 'jwt-decode';
+import PushNotification from 'react-native-push-notification';
 
 import chevronleft1 from '../assets/chevronleft1.png';
 import card from '../assets/card.png';
@@ -52,10 +53,16 @@ const Delivery = () => {
         status: 'pending',
         size: size,
       };
-      const url = 'http://192.168.100.3:8080/api/v1/transactions/';
+      const url = 'https://intermedietebackend.vercel.app/api/v1/transactions/';
       await axios.post(url, data);
       toast.show('Transaction Success!', toast.TOP);
       navigation.push('History');
+      PushNotification.localNotification({
+        channelId: 'local-notification',
+        title: 'Transaction Success!',
+        message:
+          'Your transaction is being processed. Please wait for your order!',
+      });
     } catch (error) {
       toast.show('Transaction failed!', toast.TOP);
       console.log(error);
@@ -145,7 +152,7 @@ const Delivery = () => {
             handleSubmit();
           }}
           style={styles.btn1}>
-          <Text style={styles.text12}>Proceed payment</Text>
+          <Text style={styles.text12}>Complete payment</Text>
         </Pressable>
       </View>
     </ScrollView>

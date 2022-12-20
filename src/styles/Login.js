@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     color: '#9A9A9D',
   },
   image1: {right: 44, marginBottom: 30, width: 165, height: 328},
+  image2: {},
   btn1: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -101,6 +102,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   btn3: {alignSelf: 'flex-start'},
+  btn4: {position: 'absolute', right: 0, top: '20%'},
 });
 
 export default styles;

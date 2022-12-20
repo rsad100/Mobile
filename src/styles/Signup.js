@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 17,
   },
+  btn2: {position: 'absolute', right: 0, top: '20%'},
   text3: {
     color: '#FFFFFF',
     fontWeight: '700',

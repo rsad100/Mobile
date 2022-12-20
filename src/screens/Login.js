@@ -13,16 +13,18 @@ import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import toast from 'react-native-simple-toast';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 import login1 from '../assets/login1.png';
 import google1 from '../assets/google1.png';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import eye from '../assets/eye.png';
 
 const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   const post = async () => {
     try {
@@ -43,7 +45,7 @@ const Login = () => {
   };
 
   return (
-    <ScrollView style={styles.view}>
+    <View>
       <ActivityIndicator
         style={
           loading === true
@@ -52,63 +54,83 @@ const Login = () => {
                 position: 'absolute',
                 top: '50%',
                 left: '45%',
+                zIndex: 1,
               }
             : {display: 'none', position: 'absolute', top: '50%', left: '50%'}
         }
         size="large"
       />
-      <View style={styles.view2}>
-        <View>
-          <Image style={styles.image1} source={login1} />
-          <Text style={styles.text1}>Log in</Text>
-        </View>
-        <View>
-          <TextInput
-            style={styles.input1}
-            placeholder="Enter your email adress"
-            value={email}
-            onChangeText={text => {
-              setEmail(text);
+      <ScrollView style={styles.view}>
+        <View style={styles.view2}>
+          <View>
+            <Image style={styles.image1} source={login1} />
+            <Text style={styles.text1}>Log in</Text>
+          </View>
+          <View>
+            <TextInput
+              style={styles.input1}
+              placeholder="Enter your email adress"
+              value={email}
+              onChangeText={text => {
+                setEmail(text);
+              }}
+            />
+            <View>
+              <TextInput
+                style={styles.input2}
+                placeholder="Enter your password"
+                value={password}
+                secureTextEntry={hidden}
+                onChangeText={text => {
+                  setPassword(text);
+                }}
+              />
+              <Pressable
+                onPressIn={() => {
+                  hidden === false ? setHidden(true) : setHidden(false);
+                }}
+                style={styles.btn4}>
+                <Image style={styles.image2} source={eye} />
+              </Pressable>
+            </View>
+          </View>
+          <Pressable
+            onPressIn={() => {
+              navigation.push('Forgot');
             }}
-          />
-          <TextInput
-            style={styles.input2}
-            placeholder="Enter your password"
-            value={password}
-            onChangeText={text => {
-              setPassword(text);
+            style={styles.btn3}>
+            <Text style={styles.text2}>Forgot password?</Text>
+          </Pressable>
+          <Pressable
+            onPressIn={() => {
+              navigation.push('Signup');
             }}
-          />
+            style={styles.btn3}>
+            <Text style={styles.text2}>Register</Text>
+          </Pressable>
+          <Pressable
+            onPressIn={() => {
+              post();
+            }}
+            style={styles.btn1}>
+            <Text style={styles.text3}>Login</Text>
+          </Pressable>
+          <View style={styles.view3}>
+            <View style={styles.view1} />
+            <Text style={styles.text5}>or login in with</Text>
+            <View style={styles.view1} />
+          </View>
+          <Pressable
+            onPressIn={() => {
+              post();
+            }}
+            style={styles.btn2}>
+            <Image source={google1} />
+            <Text style={styles.text4}>Login with Google</Text>
+          </Pressable>
         </View>
-        <Pressable
-          onPressIn={() => {
-            navigation.push('Forgot');
-          }}
-          style={styles.btn3}>
-          <Text style={styles.text2}>Forgot password?</Text>
-        </Pressable>
-        <Pressable
-          onPressIn={() => {
-            post();
-          }}
-          style={styles.btn1}>
-          <Text style={styles.text3}>Login</Text>
-        </Pressable>
-        <View style={styles.view3}>
-          <View style={styles.view1} />
-          <Text style={styles.text5}>or login in with</Text>
-          <View style={styles.view1} />
-        </View>
-        <Pressable
-          onPressIn={() => {
-            post();
-          }}
-          style={styles.btn2}>
-          <Image source={google1} />
-          <Text style={styles.text4}>Login with Google</Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 export default Login;

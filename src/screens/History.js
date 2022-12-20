@@ -19,7 +19,7 @@ const History = () => {
       try {
         const token = await AsyncStorage.getItem('token');
         const info = jwt(token);
-        const url = `http://192.168.100.3:8080/api/v1/transactions/${info.user_id}`;
+        const url = `https://intermedietebackend.vercel.app/api/v1/transactions/${info.user_id}`;
         setLoading(true);
         const result = await axios.get(url);
         setLoading(false);
@@ -31,6 +31,7 @@ const History = () => {
     getHistory();
   }, []);
 
+  console.log(history);
   return (
     <ScrollView style={styles.view}>
       <View style={styles.view2}>
@@ -53,6 +54,7 @@ const History = () => {
                 name={item.name_product}
                 price={item.price}
                 status={item.status}
+                key={item.id_transaction}
               />
             );
           })
